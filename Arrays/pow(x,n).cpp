@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 
+// Binary exponentiation works by repeatedly squaring the base and reducing the exponent by half (n // 2),
+// multiplying the result only when the exponent is odd. 
+// This reduces the number of multiplications to O(log n) instead of O(n), making it much faster
 
 int main(){
 	int number;
