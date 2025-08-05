@@ -25,6 +25,9 @@ void reverse(vector<int> &arr, int start, int end){
 void rotate(vector<int> &arr, int k){
     int n = arr.size();
 
+    if(n <= 1) return;
+    k %= n;
+
     // reverse first n-k elements
     reverse(arr, 0, n-k-1);
 
