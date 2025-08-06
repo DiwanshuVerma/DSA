@@ -13,6 +13,17 @@ rotate 2 steps to the right: [6,7,1,2,3,4,5]
 rotate 3 steps to the right: [5,6,7,1,2,3,4]
 */
 
+/* SOLUTION
+    1. reverse the first n-k-1 part:
+        after rev: 4, 3, 2, 1
+    2. reverse last k elements (from n-k -> n-1)
+        after rev: 7, 6, 5
+    now array updated to: 4, 3, 2, 1, 7, 6, 5
+    
+    3. reverse whole array:
+        after rev:  5, 6, 7, 1, 2, 3, 4 -> ans
+*/
+
 
 void reverse(vector<int> &arr, int start, int end){
     while(start <= end){
