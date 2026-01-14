@@ -10,12 +10,15 @@
     Output: [[-1,-1,2],[-1,0,1]]
 */
 
-/*
-    OPTIMAL : two pointer
-        1. i=0, j=i+1, k=n-1
+/*  
+    Three nested loops: O(N^3)
+
+    OPTIMAL O(N^2) : two pointer
+        1. sort the array
         2. outer loop: i=0 -> n-1
-        3. while (j<k) keep addding all three three elements
-        4. if sum > 0: k--
+        3. j=i+1, k=n-1
+        4. while (j<k) keep addding all three three elements
+        5. if sum > 0: k--
                 sum<0: j++
         else store the triplets
 */
@@ -103,13 +106,13 @@ int main()
     vector<int> nums = {-1, 0, 1, 2, -1, -4};
     sort(nums.begin(), nums.end());
     int n = nums.size();
-
-    set<vector<int>> ans;
+    vector<vector<int>> ans;
+    if(n<3) return res;  // no triplet can be made, return empty vector
 
     for (int i = 0; i < n; i++)
     {
         if (i > 0 && nums[i] == nums[i - 1]) continue;
-
+        if (nums[i] > 0) break;  // can't sum to 0 if smallest > 0
         int j = i + 1;
         int k = n - 1;
 
@@ -120,8 +123,7 @@ int main()
             else if (sum > 0) k--;
             else
             {
-                vector<int> temp = {nums[i], nums[j], nums[k]};
-                ans.insert(temp);
+                ans.insert({nums[i] + nums[j] + nums[k]});
                 j++;
                 k--;
                 while (j < k && nums[j] == nums[j - 1]) j++;
@@ -129,6 +131,7 @@ int main()
             }
         }
     }
+    // return ans;
 
     // print all triplets
     for (auto &triplet : ans)
